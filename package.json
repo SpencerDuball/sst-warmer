@@ -1,0 +1,49 @@
+{
+  "name": "sst-warmer",
+  "version": "0.0.1",
+  "description": "Extends SST SsrSites with an optional warming feature. Applies to RemixSite, SvelteKitSite, AstroSite, and SolidStartSite.",
+  "bugs": "https://github.com/SpencerDuball/sst-warmer/issues",
+  "license": "MIT",
+  "author": "Spencer Duball <spencer@spencerduball.com> (https://spencerduball.com)",
+  "repository": "https://github.com/SpencerDuball/sst-warmer.git",
+  "keywords": [
+    "sst",
+    "remix",
+    "astro",
+    "svelte",
+    "solid"
+  ],
+  "type": "module",
+  "exports": {
+    ".": {
+      "types": "./dist/index.d.ts",
+      "require": "./dist/index.cjs",
+      "import": "./dist/index.mjs"
+    }
+  },
+  "typesVersions": {
+    "*": {
+      "*": [
+        "./dist/index.d.ts"
+      ]
+    }
+  },
+  "scripts": {
+    "build": "pnpm exec tsx scripts/build.ts"
+  },
+  "devDependencies": {
+    "@aws-sdk/client-lambda": "^3.369.0",
+    "@types/aws-lambda": "^8.10.119",
+    "@types/node": "^20.4.1",
+    "aws-cdk-lib": "2.84",
+    "aws-lambda": "^1.0.7",
+    "esbuild": "^0.18.11",
+    "tsx": "^3.12.7",
+    "typescript": "^5.0.4"
+  },
+  "peerDependencies": {
+    "aws-cdk-lib": ">=2.84",
+    "constructs": ">=10.1.156",
+    "sst": ">=2.18.x"
+  }
+}
