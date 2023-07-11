@@ -4,6 +4,7 @@ var __importDefault = (this && this.__importDefault) || function (mod) {
 };
 Object.defineProperty(exports, "__esModule", { value: true });
 exports.SolidStartSite = exports.AstroSite = exports.RemixSite = exports.SvelteKitSite = void 0;
+const SsrFunction_1 = require("sst/constructs/SsrFunction");
 const constructs_1 = require("sst/constructs");
 const aws_lambda_1 = require("aws-cdk-lib/aws-lambda");
 const aws_cdk_lib_1 = require("aws-cdk-lib");
@@ -38,11 +39,16 @@ function createWarmer(site, edge, warm, serverLambdaForRegional) {
         timeout: aws_cdk_lib_1.Duration.minutes(15),
         memorySize: 1024,
         environment: {
-            FUNCTION_NAME: serverLambdaForRegional.functionName,
+            FUNCTION_NAME: serverLambdaForRegional instanceof SsrFunction_1.SsrFunction
+                ? serverLambdaForRegional.function.functionName
+                : serverLambdaForRegional.functionName,
             CONCURRENCY: warm.toString(),
         },
     });
-    serverLambdaForRegional.grantInvoke(warmer);
+    if (serverLambdaForRegional instanceof SsrFunction_1.SsrFunction)
+        serverLambdaForRegional.function.grantInvoke(warmer);
+    else
+        serverLambdaForRegional.grantInvoke(warmer);
     // create cron job
     new aws_events_1.Rule(site, "WarmerRule", {
         schedule: aws_events_1.Schedule.rate(aws_cdk_lib_1.Duration.minutes(5)),

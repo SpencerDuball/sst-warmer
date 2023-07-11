@@ -47,11 +47,15 @@ function createWarmer(
     timeout: CdkDuration.minutes(15),
     memorySize: 1024,
     environment: {
-      FUNCTION_NAME: serverLambdaForRegional.functionName,
+      FUNCTION_NAME:
+        serverLambdaForRegional instanceof SsrFunction
+          ? serverLambdaForRegional.function.functionName
+          : serverLambdaForRegional.functionName,
       CONCURRENCY: warm.toString(),
     },
   });
-  serverLambdaForRegional.grantInvoke(warmer);
+  if (serverLambdaForRegional instanceof SsrFunction) serverLambdaForRegional.function.grantInvoke(warmer);
+  else serverLambdaForRegional.grantInvoke(warmer);
 
   // create cron job
   new Rule(site, "WarmerRule", {

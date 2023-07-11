@@ -23,9 +23,9 @@ npm install sst-warmer
 
 This package is pretty simple, just ensure that you have the appropriate peer dependencies installed:
 
-- `"aws-cdk-lib": ">=2.84"`,
-- `"constructs": ">=10.1.156"`,
-- `"sst": ">=2.18"`
+- `"aws-cdk-lib": ">=2.0"`,
+- `"constructs": ">=10.1.0"`,
+- `"sst": ">=2.11.16"`
 
 Then you can import the "warm" version of the site you want to create, and use it. Since this packages declares `sst` as a peer dependency it should be compatible with any version of SST so long as you meet the peer dependency requirements, this also means it will be a drop in replacement for your current site construct with the only difference noticable is the added `warm` prop.
 
