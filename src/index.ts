@@ -1,6 +1,6 @@
 import type { Construct } from "constructs";
-import { SsrSite, type SsrSiteProps } from "sst/constructs/SsrSite";
-import { SsrFunction } from "sst/constructs/SsrFunction";
+import type { SsrSiteProps } from "sst/constructs/SsrSite";
+import type { SsrFunction } from "sst/constructs/SsrFunction";
 import {
   RemixSite as _RemixSite,
   SvelteKitSite as _SvelteKitSite,
@@ -27,7 +27,7 @@ const __dirname = url.fileURLToPath(new URL(".", import.meta.url));
  * @returns Nada
  */
 function createWarmer(
-  site: SsrSite,
+  site: Construct,
   edge?: boolean,
   warm?: number,
   serverLambdaForRegional?: CdkFunction | SsrFunction
@@ -48,13 +48,13 @@ function createWarmer(
     memorySize: 1024,
     environment: {
       FUNCTION_NAME:
-        serverLambdaForRegional instanceof SsrFunction
+        "function" in serverLambdaForRegional
           ? serverLambdaForRegional.function.functionName
           : serverLambdaForRegional.functionName,
       CONCURRENCY: warm.toString(),
     },
   });
-  if (serverLambdaForRegional instanceof SsrFunction) serverLambdaForRegional.function.grantInvoke(warmer);
+  if ("function" in serverLambdaForRegional) serverLambdaForRegional.function.grantInvoke(warmer);
   else serverLambdaForRegional.grantInvoke(warmer);
 
   // create cron job

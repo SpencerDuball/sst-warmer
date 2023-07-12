@@ -4,7 +4,6 @@ var __importDefault = (this && this.__importDefault) || function (mod) {
 };
 Object.defineProperty(exports, "__esModule", { value: true });
 exports.SolidStartSite = exports.AstroSite = exports.RemixSite = exports.SvelteKitSite = void 0;
-const SsrFunction_1 = require("sst/constructs/SsrFunction");
 const constructs_1 = require("sst/constructs");
 const aws_lambda_1 = require("aws-cdk-lib/aws-lambda");
 const aws_cdk_lib_1 = require("aws-cdk-lib");
@@ -39,13 +38,13 @@ function createWarmer(site, edge, warm, serverLambdaForRegional) {
         timeout: aws_cdk_lib_1.Duration.minutes(15),
         memorySize: 1024,
         environment: {
-            FUNCTION_NAME: serverLambdaForRegional instanceof SsrFunction_1.SsrFunction
+            FUNCTION_NAME: "function" in serverLambdaForRegional
                 ? serverLambdaForRegional.function.functionName
                 : serverLambdaForRegional.functionName,
             CONCURRENCY: warm.toString(),
         },
     });
-    if (serverLambdaForRegional instanceof SsrFunction_1.SsrFunction)
+    if ("function" in serverLambdaForRegional)
         serverLambdaForRegional.function.grantInvoke(warmer);
     else
         serverLambdaForRegional.grantInvoke(warmer);

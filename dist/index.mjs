@@ -1,4 +1,3 @@
-import { SsrFunction } from "sst/constructs/SsrFunction";
 import { RemixSite as _RemixSite, SvelteKitSite as _SvelteKitSite, AstroSite as _AstroSite, SolidStartSite as _SolidStartSite, Stack, } from "sst/constructs";
 import { Function as CdkFunction, Code, Runtime } from "aws-cdk-lib/aws-lambda";
 import { Duration as CdkDuration, CustomResource } from "aws-cdk-lib";
@@ -33,13 +32,13 @@ function createWarmer(site, edge, warm, serverLambdaForRegional) {
         timeout: CdkDuration.minutes(15),
         memorySize: 1024,
         environment: {
-            FUNCTION_NAME: serverLambdaForRegional instanceof SsrFunction
+            FUNCTION_NAME: "function" in serverLambdaForRegional
                 ? serverLambdaForRegional.function.functionName
                 : serverLambdaForRegional.functionName,
             CONCURRENCY: warm.toString(),
         },
     });
-    if (serverLambdaForRegional instanceof SsrFunction)
+    if ("function" in serverLambdaForRegional)
         serverLambdaForRegional.function.grantInvoke(warmer);
     else
         serverLambdaForRegional.grantInvoke(warmer);

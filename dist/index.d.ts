@@ -1,5 +1,5 @@
 import type { Construct } from "constructs";
-import { type SsrSiteProps } from "sst/constructs/SsrSite";
+import type { SsrSiteProps } from "sst/constructs/SsrSite";
 import { RemixSite as _RemixSite, SvelteKitSite as _SvelteKitSite, AstroSite as _AstroSite, SolidStartSite as _SolidStartSite } from "sst/constructs";
 export interface SvelteKitSiteProps extends SsrSiteProps {
     /**
