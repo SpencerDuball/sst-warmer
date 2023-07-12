@@ -33,7 +33,7 @@ function createWarmer(site, edge, warm, serverLambdaForRegional) {
     const warmer = new aws_lambda_1.Function(site, "WarmerFunction", {
         description: "Server handler warmer",
         code: aws_lambda_1.Code.fromAsset(path_1.default.join(__dirname, "../dist/support/warmer-function")),
-        runtime: aws_lambda_1.Runtime.NODEJS_18_X,
+        runtime: aws_lambda_1.Runtime.NODEJS_16_X,
         handler: "index.handler",
         timeout: aws_cdk_lib_1.Duration.minutes(15),
         memorySize: 1024,

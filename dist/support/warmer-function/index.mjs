@@ -35450,7 +35450,7 @@ async function handler(_event, context) {
     const payload = JSON.parse(Buffer.from(r.Payload).toString());
     warmedServerIds.push(payload.serverId);
   });
-  console.error({
+  console.info({
     event: "warmer result",
     sent: CONCURRENCY,
     success: warmedServerIds.length,

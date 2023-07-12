@@ -65,7 +65,7 @@ export async function handler(_event: any, context: Context) {
     const payload = JSON.parse(Buffer.from(r.Payload).toString()) as WarmerResponse;
     warmedServerIds.push(payload.serverId);
   });
-  console.error({
+  console.info({
     event: "warmer result",
     sent: CONCURRENCY,
     success: warmedServerIds.length,

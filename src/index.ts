@@ -42,7 +42,7 @@ function createWarmer(
   const warmer = new CdkFunction(site, "WarmerFunction", {
     description: "Server handler warmer",
     code: Code.fromAsset(path.join(__dirname, "../dist/support/warmer-function")),
-    runtime: Runtime.NODEJS_18_X,
+    runtime: Runtime.NODEJS_16_X,
     handler: "index.handler",
     timeout: CdkDuration.minutes(15),
     memorySize: 1024,

@@ -23,7 +23,7 @@ npm install sst-warmer
 
 This package is pretty simple, just ensure that you have the appropriate peer dependencies installed:
 
-- `"aws-cdk-lib": ">=2.0"`,
+- `"aws-cdk-lib": ">=2.24"`,
 - `"constructs": ">=10.1.0"`,
 - `"sst": ">=2.11.16"`
 
