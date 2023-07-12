@@ -1,6 +1,6 @@
 {
   "name": "sst-warmer",
-  "version": "0.1.0",
+  "version": "0.1.1",
   "description": "Extends SST SsrSites with an optional warming feature. Applies to RemixSite, SvelteKitSite, AstroSite, and SolidStartSite.",
   "bugs": "https://github.com/SpencerDuball/sst-warmer/issues",
   "license": "MIT",
